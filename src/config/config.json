@@ -5,5 +5,8 @@
     "database": "sessions_app",
     "host": "db",
     "dialect": "postgres"
+  },
+  "production": {
+    "dialect": "postgres"
   }
 }
