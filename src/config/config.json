@@ -1,0 +1,13 @@
+{
+  "development": {
+    "username": "sessions_user",
+    "password": "password",
+    "database": "sessions_app",
+    "host": "db",
+    "dialect": "postgres"
+  },
+  "production": {
+    "use_env_variable": "DATABASE_URL",
+    "dialect": "postgres"
+  }
+}
