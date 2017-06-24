@@ -1,0 +1,14 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  override:
+    - docker build --rm=false -t registry.heroku.com/sessions-mvp/web .
+
+deployment:
+  hub:
+    branch: master
+    commands:
+      - docker login -u=$HEROKU_EMAIL -p=$HEROKU_PASS registry.heroku.com
+      - docker push registry.heroku.com/sessions-mvp/web
