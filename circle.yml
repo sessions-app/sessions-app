@@ -10,5 +10,5 @@ deployment:
   hub:
     branch: master
     commands:
-      - docker login -u $HEROKU_EMAIL -p $HEROKU_PASS registry.heroku.com
+      - docker login -e $HEROKU_EMAIL -u $HEROKU_EMAIL -p $HEROKU_API_KEY registry.heroku.com
       - docker push registry.heroku.com/sessions-mvp/web
