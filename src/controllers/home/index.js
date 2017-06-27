@@ -4,6 +4,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   res.render('home', {
+    pageTitle: 'Sessions',
     title: 'This is the home',
   });
 });
