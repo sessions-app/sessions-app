@@ -1,9 +1,13 @@
 const express = require('express');
 const sequelize = require('./models').sequelize;
 
+const homeRoute = require('./controllers/home');
+
 const app = express();
 
-app.get('/', (req, res) => {
+app.use('/', homeRoute);
+
+app.get('/db-check', (req, res) => {
   sequelize.authenticate().then(() => {
     res.send('Was able to connect to database');
   }).catch(() => {
