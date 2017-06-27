@@ -1,24 +1,19 @@
 const express = require('express');
 const exhbs = require('./views/exhbs');
 const path = require('path');
-const sequelize = require('./models').sequelize;
 
+// Route imports
 const homeRoute = require('./controllers/home');
 
+// Initializations
 const app = express();
 
+// Configuration
 app.engine('.hbs', exhbs.engine);
 app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'views'));
 
+// Router wiring
 app.use('/', homeRoute);
-
-app.get('/db-check', (req, res) => {
-  sequelize.authenticate().then(() => {
-    res.send('Was able to connect to database');
-  }).catch(() => {
-    res.send('Was unable to connect to database');
-  });
-});
 
 app.listen(process.env.PORT || 8080);
