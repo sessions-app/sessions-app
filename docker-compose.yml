@@ -6,10 +6,11 @@ services:
       dockerfile: Dockerfile-local
     ports:
       - "8080:8080"
+      - "8082:8082"
     depends_on:
       - db
     volumes:
-      - .:/code
+      - ./src:/code/src
   db:
     image: postgres:alpine
     ports:
