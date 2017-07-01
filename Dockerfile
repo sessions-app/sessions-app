@@ -2,14 +2,13 @@ FROM node:6.11.0-alpine
 
 ENV NODE_ENV production
 
-RUN yarn global add npm@5.x
-
 COPY package.json /code/package.json
-RUN cd /code && npm install
+COPY yarn.lock /code/yarn.lock
+RUN cd /code && yarn install
 
 COPY . /code
 WORKDIR /code
 
-RUN npm run build
+RUN yarn run build
 
-CMD ["npm","start"]
+CMD ["yarn","start"]
