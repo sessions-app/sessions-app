@@ -1,8 +1,7 @@
-var expect    = require("chai").expect;
+const expect = require('chai').expect;
 
-
-describe("Filler Test", function() {
-  it("passes", function(){
+describe('Filler Test', () => {
+  it('passes', () => {
     expect(0).to.equal(0);
-  })
+  });
 });

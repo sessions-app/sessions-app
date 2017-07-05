@@ -1,9 +1,14 @@
 FROM node:6.11.0-alpine
 
-ADD . /code
-WORKDIR /code
 ENV NODE_ENV development
 
-EXPOSE 8080
+COPY package.json /code/package.json
+COPY yarn.lock /code/yarn.lock
+RUN cd /code && yarn install
 
-CMD ["npm","run","dev"]
+COPY . /code
+WORKDIR /code
+
+EXPOSE 8080 8082
+
+CMD ["yarn","run","dev"]
