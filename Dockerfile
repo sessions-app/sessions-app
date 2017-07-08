@@ -11,4 +11,4 @@ WORKDIR /code
 
 RUN yarn run build
 
-CMD ["yarn","start"]
+CMD ["sh", "./scripts/server.sh"]

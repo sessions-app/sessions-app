@@ -8,6 +8,7 @@
     "lint": "./node_modules/.bin/eslint .",
     "start": "node ./src/server.js",
     "build": "./node_modules/.bin/webpack",
+    "migrate": "cd src && ../node_modules/.bin/sequelize db:migrate",
     "dev": "./node_modules/.bin/npm-run-all --parallel dev-server dev-client",
     "dev-server": "./node_modules/.bin/nodemon ./src/server.js",
     "dev-client": "./node_modules/.bin/webpack-dev-server --host 0.0.0.0"
@@ -29,6 +30,7 @@
     "react-dom": "^15.6.1",
     "request": "^2.81.0",
     "sequelize": "^4.2.0",
+    "sequelize-cli": "^2.7.0",
     "serve-static": "^1.12.3",
     "webpack": "^3.0.0"
   },
@@ -43,7 +45,6 @@
     "mocha": "^3.4.2",
     "nodemon": "^1.11.0",
     "npm-run-all": "^4.0.2",
-    "sequelize-cli": "^2.7.0",
     "webpack-dev-server": "^2.5.0"
   }
 }
