@@ -1,4 +1,4 @@
 postgres-data/
-src/migrations/
-src/models/
+src/server/migrations/
+src/server/models/
 dist/

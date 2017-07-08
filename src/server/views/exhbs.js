@@ -2,8 +2,8 @@ const expressHandlebars = require('express-handlebars');
 
 const exbhs = expressHandlebars.create({
   defaultLayout: 'main',
-  layoutsDir: 'src/views/layouts',
-  partialsDir: 'src/views/partials',
+  layoutsDir: 'src/server/views/layouts',
+  partialsDir: 'src/server/views/partials',
   extname: '.hbs',
 });
 

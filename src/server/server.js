@@ -15,7 +15,7 @@ app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'views'));
 
 // Static files
-app.use(serveStatic(path.join('__dirname', '..', 'dist')));
+app.use(serveStatic(path.join('__dirname', '..', '..', 'dist')));
 
 // Router wiring
 app.use('/', homeRoute);
