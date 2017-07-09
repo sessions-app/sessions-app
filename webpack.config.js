@@ -4,8 +4,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
-    hello: './src/components/Hello.jsx',
-    styling: './src/styling',
+    hello: './src/client/assets/components/Hello.jsx',
+    styling: './src/client/assets/styling',
   },
   output: {
     path: path.join(__dirname, 'dist'),

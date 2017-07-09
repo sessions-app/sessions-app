@@ -4,7 +4,7 @@ n=0
 until [ $n -ge 5 ]
 do
    yarn run migrate && break
-   n=$[$n+1]
+   n=$(($n+1))
    sleep 2
 done
 
