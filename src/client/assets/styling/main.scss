@@ -8,7 +8,7 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
   - Font: #2B4162;
   - Secondary/Buttons: #385F71;
   - Buttons On Hover: #9EB6C1;
-  - Canvas/Contrast: #EFF2F4;  
+  - Canvas/Contrast: #EFF2F4;
 */
 
 
@@ -40,9 +40,6 @@ body {
   background-color: $button-color;
   color: $canvas-color;
   &:hover, &:focus {
-    background-color: $button-color-hover; 
+    background-color: $button-color-hover;
   }
 }
-
-
-
