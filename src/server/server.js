@@ -5,6 +5,7 @@ const serveStatic = require('serve-static');
 
 // Route imports
 const homeRoute = require('./controllers/home');
+const oauthRoute = require('./controllers/oauth');
 
 // Initializations
 const app = express();
@@ -20,5 +21,6 @@ app.use(serveStatic(path.join(__dirname, '..', '..', 'dist')));
 
 // Router wiring
 app.use('/', homeRoute);
+app.use('/oauth', oauthRoute);
 
 app.listen(process.env.PORT || 8080);
