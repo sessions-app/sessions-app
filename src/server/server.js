@@ -1,5 +1,5 @@
 const express = require('express');
-const exhbs = require('./views/exhbs');
+const exhbs = require('../client/views/exhbs');
 const path = require('path');
 const serveStatic = require('serve-static');
 
@@ -12,7 +12,7 @@ const app = express();
 // Configuration
 app.engine('.hbs', exhbs.engine);
 app.set('view engine', '.hbs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '..', 'client', 'views'));
 
 // Static files
 app.use(serveStatic(path.join('__dirname', '..', '..', 'dist')));
