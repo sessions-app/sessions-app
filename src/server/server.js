@@ -16,7 +16,7 @@ app.set('views', path.join(__dirname, '..', 'client', 'views'));
 app.locals.assetPrefix = process.env.NODE_ENV === 'development' ? 'http://localhost:8082/assets' : '';
 
 // Static files
-app.use(serveStatic(path.join('__dirname', '..', '..', 'dist')));
+app.use(serveStatic(path.join(__dirname, '..', '..', 'dist')));
 
 // Router wiring
 app.use('/', homeRoute);
