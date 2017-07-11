@@ -30,12 +30,15 @@ passport.use(new SpotifyStrategy({
   .spread((user) => {
     const { dataValues } = user;
 
-    const authParams = { accessToken, refreshToken, profile };
-    Object.assign(dataValues, authParams);
+    const payload = { accessToken, refreshToken, profile };
+    Object.assign(dataValues, payload);
 
     done(null, dataValues);
-    return null;
+    return { id: dataValues.id, payload };
   })
+  .then(user => db.User.update(
+    { payload: JSON.stringify(user.payload) },
+    { where: { id: user.id } }))
   .catch(err => done(err))));
 
 const authMiddleware = (req, res, next) => {

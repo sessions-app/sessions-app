@@ -12,7 +12,7 @@ router.get('/callback',
   });
 
 router.get('/test', authMiddleware, (req, res) => {
-  res.send('You\'re in!');
+  res.send(req.user);
 });
 
 module.exports = router;
