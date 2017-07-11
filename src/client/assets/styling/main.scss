@@ -1,2 +1,48 @@
-$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
-@import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss'
+$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+@import 'variables';
+@import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
+@import 'overwrites';
+
+/* Site color scheme:
+  - Background: #E2E2E2
+  - Font: #2B4162;
+  - Secondary/Buttons: #385F71;
+  - Buttons On Hover: #9EB6C1;
+  - Canvas/Contrast: #EFF2F4;  
+*/
+
+
+body {
+  background-color: $main-background-color;
+  color: $main-font-color;
+}
+
+.site-title{
+  text-align: center;
+  position: relative;
+  border-radius: 5px;
+  border-style: none;
+  h1 {
+    font-size: 700%;
+  }
+  nav {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+  }
+}
+
+.site-hook {
+  background-color: $canvas-color;
+}
+
+.home-page-btn {
+  background-color: $button-color;
+  color: $canvas-color;
+  &:hover, &:focus {
+    background-color: $button-color-hover; 
+  }
+}
+
+
+

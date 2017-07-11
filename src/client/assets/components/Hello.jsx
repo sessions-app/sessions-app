@@ -8,7 +8,4 @@ Hello.propTypes = {
   name: PropTypes.string.isRequired,
 };
 
-ReactDOM.render(
-  <Hello name="World" />,
-  document.getElementById('root'),
-);
+

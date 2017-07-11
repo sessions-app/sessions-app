@@ -1,0 +1,11 @@
+/* Set site-wide color scheme */
+$main-background-color: #E2E2E2;
+$main-font-color: #2B4162;
+$button-color: #385F71;
+$button-color-hover: #9EB6C1;
+$canvas-color: #EFF2F4;
+
+/* Override default bootstrap colors */
+$btn-default-color: $canvas-color;
+
+
