@@ -37,7 +37,7 @@ passport.use(new SpotifyStrategy({
     return { id: dataValues.id, payload };
   })
   .then(user => db.User.update(
-    { payload: JSON.stringify(user.payload) },
+    { payload: user.payload },
     { where: { id: user.id } }))
   .catch(err => done(err))));
 
