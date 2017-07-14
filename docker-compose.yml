@@ -11,6 +11,9 @@ services:
       - db
     volumes:
       - ./src:/code/src
+    environment:
+      - SPOTIFY_CLIENT_ID=${SPOTIFY_CLIENT_ID}
+      - SPOTIFY_CLIENT_SECRET=${SPOTIFY_CLIENT_SECRET}
   db:
     image: postgres:alpine
     ports:

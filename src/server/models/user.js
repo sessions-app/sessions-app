@@ -5,6 +5,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    payload: {
+      type: DataTypes.JSON,
+      allowNull: true,
+    },
   }, {
     timestamps: true,
     paranoid: true,
