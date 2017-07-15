@@ -2,6 +2,8 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import 'variables';
 @import '~bootstrap-sass/assets/stylesheets/_bootstrap.scss';
 @import 'overwrites';
+@import 'components/contribution-list';
+@import 'components/join-modal';
 
 /* Site color scheme:
   - Background: #E2E2E2

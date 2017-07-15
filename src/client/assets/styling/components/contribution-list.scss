@@ -1,0 +1,36 @@
+$item-color: darken($canvas-color, 10%);
+$item-color-hover: darken($item-color, 10%);
+
+.contribution-list {
+  display: flex;
+  background-color: $canvas-color;
+}
+
+.contribution-list-item {
+  flex: 0 1 20%;
+  background-color: $item-color;
+
+  &:hover {
+    background-color: $item-color-hover;
+  }
+}
+
+.contribution {
+  padding: 30%;
+}
+
+.contribution-drop-valid-over {
+  background-color: adjust-color($item-color, $green: 40%);
+}
+
+.contribution-drop-valid {
+  background-color: adjust-color($item-color, $green: 20%);
+}
+
+.contribution-drop-invalid {
+  background-color: adjust-color($item-color, $red: 20%);
+}
+
+.contribution-content {
+  text-align: center;
+}
