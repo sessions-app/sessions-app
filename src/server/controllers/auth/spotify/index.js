@@ -9,7 +9,7 @@ router.get('/', passport.authenticate('spotify', { scope: ['user-library-modify'
 router.get('/callback',
   passport.authenticate('spotify', { failureRedirect: '/' }),
   (req, res) => {
-    res.redirect('/');
+    res.redirect('/sessions');
   });
 
 router.get('/test', authMiddleware, (req, res) => {
