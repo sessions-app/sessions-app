@@ -8,6 +8,7 @@ const { session, store, passport } = require('./controllers/auth/config');
 // Route imports
 const homeRoute = require('./controllers/home');
 const authRoute = require('./controllers/auth');
+const sessionsRoute = require('./controllers/sessions');
 
 // Initializations
 const app = express();
@@ -43,5 +44,6 @@ app.use(serveStatic(path.join(__dirname, '..', '..', 'dist')));
 // Router wiring
 app.use('/', homeRoute);
 app.use('/auth', authRoute);
+app.use('/sessions', sessionsRoute);
 
 app.listen(process.env.PORT || 8080);
