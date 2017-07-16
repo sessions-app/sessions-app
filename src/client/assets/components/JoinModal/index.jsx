@@ -4,6 +4,7 @@ import Autosuggest from 'react-autosuggest';
 import axios from 'axios';
 import Promise from 'bluebird';
 
+
 import ContributionList from '../ContributionList';
 
 const getSuggestions = (value) => {

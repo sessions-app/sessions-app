@@ -1,5 +1,5 @@
 const loggedIn = (req, res, next) => {
-  if (req.user) {
+  if (req.isAuthenticated()) {
     next();
   } else {
     res.redirect('/auth/spotify');
