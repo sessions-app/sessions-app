@@ -16,7 +16,7 @@ const collect = (connect, monitor) => ({
 const Contribution = (props) => {
   const { contributionId, connectDragSource, isDragging } = props;
 
-  return connectDragSource(
+  const contribution = (
     <div className="contribution">
       <p
         className="contribution-content"
@@ -26,6 +26,8 @@ const Contribution = (props) => {
       </p>
     </div>
   );
+
+  return connectDragSource(contribution);
 };
 
 Contribution.propTypes = {

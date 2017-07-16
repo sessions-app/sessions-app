@@ -38,7 +38,7 @@ const ContributionSlot = (props) => {
     'contribution-drop-invalid': (isOver && !canDrop),
   });
 
-  return connectDropTarget(
+  const contributionSlot = (
     <div
       className={className}
       role="presentation"
@@ -46,6 +46,8 @@ const ContributionSlot = (props) => {
       {contribution}
     </div>
   );
+
+  return connectDropTarget(contributionSlot);
 };
 
 ContributionSlot.propTypes = {

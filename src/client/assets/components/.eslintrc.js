@@ -8,13 +8,4 @@ module.exports = {
   env: {
     browser: true,
   },
-  rules: {
-    "comma-dangle": ["error", {
-      "arrays": "only-multiline",
-      "objects": "only-multiline",
-      "imports": "only-multiline",
-      "exports": "only-multiline",
-      "functions": "ignore"
-    }],
-  }
 }
