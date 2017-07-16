@@ -4,7 +4,7 @@ import { DragSource } from 'react-dnd';
 
 const contributionSource = {
   beginDrag(props) {
-    return { position: props.position };
+    return { name: props.name };
   },
 };
 
@@ -14,27 +14,24 @@ const collect = (connect, monitor) => ({
 });
 
 const Contribution = (props) => {
-  const { contributionId, connectDragSource, isDragging } = props;
+  const { connectDragSource, isDragging, name } = props;
 
-  const contribution = (
+  return connectDragSource(
     <div className="contribution">
       <p
         className="contribution-content"
         style={{ opacity: isDragging ? 0.5 : 1 }}
       >
-        {contributionId}
+        {name}
       </p>
     </div>
   );
-
-  return connectDragSource(contribution);
 };
 
 Contribution.propTypes = {
   connectDragSource: PropTypes.func.isRequired,
   isDragging: PropTypes.bool.isRequired,
-  position: PropTypes.number.isRequired,
-  contributionId: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 module.exports = DragSource('CONTRIBUTION', contributionSource, collect)(Contribution);
