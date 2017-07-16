@@ -1,5 +1,6 @@
 $item-color: darken($canvas-color, 10%);
 $item-color-hover: darken($item-color, 10%);
+$item-color-drag: darken($item-color-hover, 5%);
 
 .contribution-list {
   display: flex;
