@@ -1,55 +1,47 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import _ from 'lodash';
 
 import ContributionSlot from './ContributionSlot';
 
-class ContributionList extends React.Component {
-  constructor() {
-    super();
+const swap = (updateOrder, contributions, x) => (y) => {
+  const newContributionOrder = _.clone(contributions);
 
-    this.state = {
-      contributions: [
-        'a',
-        'b',
-      ],
-    };
-  }
+  const temp = newContributionOrder[x];
+  newContributionOrder[x] = newContributionOrder[y];
+  newContributionOrder[y] = temp;
 
-  swap(x) {
-    return (y) => {
-      const contributions = _.clone(this.state.contributions);
+  updateOrder(newContributionOrder);
+};
 
-      const temp = contributions[x];
-      contributions[x] = contributions[y];
-      contributions[y] = temp;
-
-      this.setState({ contributions });
-    };
-  }
-
-  render() {
-    const slots = _.times(5, (i) => {
-      const contributionId = this.state.contributions[i];
-      const swap = contributionId ? this.swap(i) : null;
-
-      return (
-        <ContributionSlot
-          contributionId={contributionId}
-          key={i}
-          position={i}
-          swap={swap}
-        />
-      );
-    });
+const ContributionList = (props) => {
+  const { contributions, updateOrder } = props;
+  const slots = _.times(5, (i) => {
+    const contributionId = contributions[i];
+    const swapWith = contributionId ? swap(updateOrder, contributions, i) : null;
 
     return (
-      <div className="contribution-list">
-        {slots}
-      </div>
+      <ContributionSlot
+        contributionId={contributionId}
+        key={i}
+        position={i}
+        swap={swapWith}
+      />
     );
-  }
-}
+  });
+
+  return (
+    <div className="contribution-list">
+      {slots}
+    </div>
+  );
+};
+
+ContributionList.propTypes = {
+  contributions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  updateOrder: PropTypes.func.isRequired,
+};
 
 module.exports = DragDropContext(HTML5Backend)(ContributionList);
