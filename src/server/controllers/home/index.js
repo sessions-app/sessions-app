@@ -7,7 +7,6 @@ const router = express.Router();
 router.get('/', (req, res) => {
   res.render('home', {
     pageTitle: 'Sessions',
-    title: 'Sessions',
     loggedIn: req.isAuthenticated(),
   });
 });
