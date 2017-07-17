@@ -25,6 +25,7 @@ const sessOptions = {
   store,
   resave: false,
   saveUninitialized: false,
+  cookie: {},
 };
 
 if (process.env.NODE_ENV === 'production') {
