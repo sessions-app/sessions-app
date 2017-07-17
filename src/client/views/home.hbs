@@ -1,8 +1,16 @@
-<h1>{{title}}</h1>
 
-<div>This is a test</div>
-
-<div>{{> ex}}</div>
-
-<div id='root'></div>
-<script src='{{assetPrefix}}/js/hello.js'></script>
+<div class='page-header site-title'>
+  <h1>Sessions</h1>
+  <nav>
+    {{#unless loggedIn}}
+      <a href='/auth/spotify' class='btn home-page-btn'>Join</a>
+    {{/unless}}
+  </nav>
+</div>
+<div class='jumbotron site-hook'>
+  <h1>Music Lovers...</h1>
+  <p>
+    This is example text that isn't actually our site hook, but we'll work on that. If you want to learn more, join a session.
+  </p>
+  <p><a class='btn btn-lg home-page-btn' href='/sessions'>Join Session</a></p>
+</div>

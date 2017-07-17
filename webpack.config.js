@@ -4,7 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
-    hello: './src/client/assets/components/Hello.jsx',
+    session: './src/client/assets/components/Session.jsx',
     styling: './src/client/assets/styling',
   },
   output: {
@@ -40,6 +40,9 @@ module.exports = {
         },
       },
     ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
