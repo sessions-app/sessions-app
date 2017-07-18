@@ -1,0 +1,12 @@
+const dbConfig = require('config').get('database');
+const path = require('path');
+
+/**
+ * sequelize-cli needs the config field to point to a file path, so we point
+ * it at this one.
+ */
+dbConfig['config'] = __filename;
+dbConfig['migrations-path'] = path.join(__dirname, 'src', 'server', 'migrations');
+dbConfig['models-path'] = path.join(__dirname, 'src', 'server', 'models');
+
+module.exports = dbConfig;

@@ -1,5 +1,5 @@
 const express = require('express');
-const { passport, authMiddleware } = require('../config');
+const { passport, authMiddleware } = require('../setup');
 
 const router = express.Router();
 

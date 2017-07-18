@@ -1,0 +1,27 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+      - "8082:8082"
+    depends_on:
+      - db
+    volumes:
+      - ./src:/code/src
+    environment:
+      - SPOTIFY_CLIENT_ID=${SPOTIFY_CLIENT_ID}
+      - SPOTIFY_CLIENT_SECRET=${SPOTIFY_CLIENT_SECRET}
+      - DATABASE_URL=${DATABASE_URL}
+  db:
+    image: postgres:alpine
+    ports:
+      - "8081:5432"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=sessions_user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=sessions_app
