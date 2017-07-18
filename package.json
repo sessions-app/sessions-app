@@ -8,7 +8,7 @@
     "lint": "./node_modules/.bin/eslint .",
     "start": "node ./src/server/server.js",
     "build": "./node_modules/.bin/webpack",
-    "migrate": "cd src/server && ../../node_modules/.bin/sequelize db:migrate",
+    "migrate": "./node_modules/.bin/sequelize db:migrate",
     "dev": "./node_modules/.bin/npm-run-all --parallel dev-server dev-client",
     "dev-server": "./node_modules/.bin/nodemon ./src/server/server.js",
     "dev-client": "./node_modules/.bin/webpack-dev-server --host 0.0.0.0"
@@ -23,6 +23,7 @@
     "babel-preset-react": "^6.24.1",
     "bootstrap-sass": "^3.3.7",
     "classnames": "^2.2.5",
+    "config": "^1.26.1",
     "connect-session-sequelize": "^4.1.0",
     "css-loader": "^0.28.4",
     "express": "^4.15.3",
