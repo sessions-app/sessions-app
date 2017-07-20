@@ -53,42 +53,41 @@ class JoinModal extends React.Component {
   );
   }
 
-  onChange(event, { newValue }) {
-    this.setState({
-      value: newValue
-    });
-  }
-
   onSuggestionsFetchRequested({ value }) {
-    this.setState({
-      suggestions: this.getSuggestions(value)
-    });
+    this.getSuggestions(value)
+    .then((returnedTracks) => {
+      this.setState({
+        suggestions: returnedTracks,
+      });
+    },
+  );
   }
 
   onSuggestionsClearRequested() {
     this.setState({
-      suggestions: []
+      suggestions: [],
     });
   }
 
   getSuggestions(value) {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
-    const { languages } = this.state
-
-    return inputLength === 0 ? [] : languages.filter(lang =>
-      lang.name.toLowerCase().slice(0, inputLength) === inputValue
-    );
+    if (inputLength === 0) return Promise.resolve([]);
+    return axios('/sessions/searchTracks').then(res => res.data.songs);
   }
 
   getSuggestionValue(suggestion){
-    return suggestion.name
+    return suggestion.name;
   }
 
-  renderSuggestion(suggestion){
+  updateOrder(contributions) {
+    this.setState({ contributions });
+  }
+
+  renderSuggestion(suggestion) {
     return (
       <div>
-        {suggestion.name}
+        {suggestion.name} - {suggestion.artist}
       </div>
     );
   }
