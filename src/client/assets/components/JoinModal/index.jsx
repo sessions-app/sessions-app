@@ -53,14 +53,44 @@ class JoinModal extends React.Component {
   );
   }
 
-  onSuggestionsClearRequested() {
+  onChange(event, { newValue }) {
     this.setState({
-      suggestions: [],
+      value: newValue
     });
   }
 
-  updateOrder(contributions) {
-    this.setState({ contributions });
+  onSuggestionsFetchRequested({ value }) {
+    this.setState({
+      suggestions: this.getSuggestions(value)
+    });
+  }
+
+  onSuggestionsClearRequested() {
+    this.setState({
+      suggestions: []
+    });
+  }
+
+  getSuggestions(value) {
+    const inputValue = value.trim().toLowerCase();
+    const inputLength = inputValue.length;
+    const { languages } = this.state
+
+    return inputLength === 0 ? [] : languages.filter(lang =>
+      lang.name.toLowerCase().slice(0, inputLength) === inputValue
+    );
+  }
+
+  getSuggestionValue(suggestion){
+    return suggestion.name
+  }
+
+  renderSuggestion(suggestion){
+    return (
+      <div>
+        {suggestion.name}
+      </div>
+    );
   }
 
   render() {
