@@ -73,7 +73,9 @@ class JoinModal extends React.Component {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
     if (inputLength === 0) return Promise.resolve([]);
-    return axios('/sessions/searchTracks').then(res => res.data.songs);
+    return axios.post('/sessions/searchTracks', {
+      query: value,
+    }).then(res => res.data);
   }
 
   getSuggestionValue(suggestion){
