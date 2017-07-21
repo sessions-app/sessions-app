@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 
 import ContributionList from '../ContributionList';
 
@@ -20,6 +20,11 @@ class JoinModal extends React.Component {
     this.setState({ contributions });
   }
 
+  submitContributions() {
+    // Handle submitting contributions
+    this.setState({ open: false });
+  }
+
   render() {
     const { contributions } = this.state;
     return (
@@ -32,12 +37,20 @@ class JoinModal extends React.Component {
         <Modal.Header className="join-modal" closeButton>
           <Modal.Title>Join a Session</Modal.Title>
         </Modal.Header>
+
         <Modal.Body className="join-modal">
           <ContributionList
             contributions={contributions}
             updateOrder={contribs => this.updateOrder(contribs)}
           />
         </Modal.Body>
+
+        <Modal.Footer className="join-modal">
+          <Button
+            bsStyle="primary"
+            onClick={() => this.submitContributions()}
+          >Submit</Button>
+        </Modal.Footer>
       </Modal>
     );
   }
