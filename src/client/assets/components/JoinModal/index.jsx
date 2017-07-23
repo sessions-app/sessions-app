@@ -56,7 +56,7 @@ class JoinModal extends React.Component {
         suggestions: returnedTracks,
       });
     },
-  );
+    );
   }
 
   onSuggestionsClearRequested() {
@@ -66,7 +66,7 @@ class JoinModal extends React.Component {
   }
   addTrack() {
     const currContributions = _.clone(this.state.contributions);
-    currContributions.push(this.state.selectedTrack.id);
+    if (currContributions.length < 5) (currContributions.push(this.state.selectedTrack.id));
     this.setState({
       contributions: currContributions,
       selectedTrack: null,
@@ -101,27 +101,32 @@ class JoinModal extends React.Component {
             contributions={contributions}
             updateOrder={contribs => this.updateOrder(contribs)}
           />
-          <Autosuggest
-            suggestions={suggestions}
-            onSuggestionsFetchRequested={val => this.onSuggestionsFetchRequested(val)}
-            onSuggestionsClearRequested={() => this.onSuggestionsClearRequested()}
-            getSuggestionValue={val => getSuggestionValue(val)}
-            renderSuggestion={sugg => renderSuggestion(sugg)}
-            inputProps={inputProps}
-          />
-          <Button
-            bsStyle="primary"
-            onClick={() => this.addTrack()}
-            disabled={!selectedTrack}
-          >+</Button>
-        </Modal.Body>
+          <span className="contribution-controls">
+            <span className="contribution-search">
+              <Autosuggest
+                suggestions={suggestions}
+                onSuggestionsFetchRequested={val => this.onSuggestionsFetchRequested(val)}
+                onSuggestionsClearRequested={() => this.onSuggestionsClearRequested()}
+                getSuggestionValue={val => getSuggestionValue(val)}
+                renderSuggestion={sugg => renderSuggestion(sugg)}
+                inputProps={inputProps}
+              />
+              <Button
+                bsStyle="primary"
+                id="contribute-track-btn"
+                onClick={() => this.addTrack()}
+                disabled={!selectedTrack}
+              >+</Button>
+            </span>
+            <span className="submit-contributions">
+              <Button
+                bsStyle="primary"
+                onClick={() => this.submitContributions()}
+              >Submit</Button>
+            </span>
+          </span>
 
-        <Modal.Footer className="join-modal">
-          <Button
-            bsStyle="primary"
-            onClick={() => this.submitContributions()}
-          >Submit</Button>
-        </Modal.Footer>
+        </Modal.Body>
       </Modal>
     );
   }
