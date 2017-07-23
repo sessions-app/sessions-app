@@ -22,20 +22,17 @@ const Contribution = (props) => {
   const source = `https://open.spotify.com/embed?${qs.encode(trackQuery)}`;
   const contribution = (
     <div className="contribution">
-      <p
+      <iframe
+        title="song"
+        src={source}
+        width="300"
+        height="80"
+        frameBorder="0"
+        allowTransparency="true"
         className="contribution-content"
         style={{ opacity: isDragging ? 0.5 : 1 }}
       >
-        <iframe
-          title="song"
-          src={source}
-          width="300"
-          height="80"
-          frameBorder="0"
-          allowTransparency="true"
-        >
-        </iframe>
-      </p>
+      </iframe>
     </div>
   );
 
