@@ -4,7 +4,7 @@
   "description": "Sessions server and client",
   "main": "app.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --reporter spec",
+    "test": "./node_modules/.bin/mocha --reporter spec --recursive test",
     "lint": "./node_modules/.bin/eslint --ext 'js,jsx' src test config",
     "start": "node ./src/server/server.js",
     "build": "./node_modules/.bin/webpack",
@@ -67,6 +67,8 @@
     "mocha": "^3.4.2",
     "nodemon": "^1.11.0",
     "npm-run-all": "^4.0.2",
+    "proxyquire": "^1.8.0",
+    "sinon": "^2.3.8",
     "webpack-dev-server": "^2.5.0"
   }
 }
