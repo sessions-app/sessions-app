@@ -8,6 +8,7 @@ let spotifyWrapper;
 let axiosMock;
 let dbMock;
 let user;
+let query;
 
 process.env.SPOTIFY_CLIENT_ID = 'SPOTIFY_CLIENT_ID';
 process.env.SPOTIFY_CLIENT_SECRET = 'SPOTIFY_CLIENT_SECRET';
@@ -33,6 +34,8 @@ const init = (authorized, refresh) => {
       }));
 
       axiosMock.onCall(2).returns(Promise.resolve('response'));
+    } else {
+      axiosMock.onCall(1).returns(Promise.reject('err'));
     }
   }
 
@@ -54,6 +57,10 @@ const init = (authorized, refresh) => {
       refreshToken: 'refresh token',
     },
   };
+
+  query = {
+    key: 'value',
+  };
 };
 
 describe('Spotify Wrapper tests', () => {
@@ -61,21 +68,25 @@ describe('Spotify Wrapper tests', () => {
     beforeEach(() => init(true));
 
     it('completes without throwing an error', () =>
-      spotifyWrapper(user, 'method', '/endpoint', {})
+      spotifyWrapper(user, 'method', '/endpoint', query)
         .then(() => sinon.assert.pass())
         .catch(() => sinon.assert.fail()));
 
+    it('hits the Spotify API only once', () =>
+      spotifyWrapper(user, 'method', '/endpoint', query)
+        .then(() => sinon.assert.calledOnce(axiosMock)));
+
     it('makes the request with the proper parameters', () =>
-      spotifyWrapper(user, 'method', '/endpoint', {})
+      spotifyWrapper(user, 'method', '/endpoint', query)
         .then(() => sinon.assert.calledWith(axiosMock, {
           method: 'method',
           url: 'https://api.spotify.com/v1/endpoint',
-          params: {},
+          params: { key: 'value' },
           headers: { Authorization: 'Bearer access token' },
         })));
 
-    it('returns the response to the user', () =>
-      spotifyWrapper(user, 'method', '/endpoint', {})
+    it('returns the response to the caller', () =>
+      spotifyWrapper(user, 'method', '/endpoint', query)
         .then(res => expect(res).to.equal('response')));
   });
 
@@ -83,12 +94,16 @@ describe('Spotify Wrapper tests', () => {
     beforeEach(() => init(false, true));
 
     it('completes without throwing an error', () =>
-      spotifyWrapper(user, 'method', '/endpoint', {})
+      spotifyWrapper(user, 'method', '/endpoint', query)
         .then(() => sinon.assert.pass())
         .catch(() => sinon.assert.fail()));
 
+    it('hits the Spotify API three times', () =>
+      spotifyWrapper(user, 'method', '/endpoint', query)
+        .then(() => sinon.assert.calledThrice(axiosMock)));
+
     it('makes the refresh request with the proper parameters', () =>
-      spotifyWrapper(user, 'method', '/endpoint', {})
+      spotifyWrapper(user, 'method', '/endpoint', query)
         .then(() => sinon.assert.calledWith(axiosMock, {
           method: 'post',
           url: 'https://accounts.spotify.com/api/token',
@@ -100,12 +115,55 @@ describe('Spotify Wrapper tests', () => {
         })));
 
     it('saves the new token in the user model', () =>
-      spotifyWrapper(user, 'method', '/endpoint', {})
+      spotifyWrapper(user, 'method', '/endpoint', query)
         .then(() => sinon.assert.calledWith(dbMock.User.update, {
           payload: {
             accessToken: 'new access token',
             refreshToken: 'refresh token',
           },
         }, { where: { id: 0 } })));
+
+    it('updates the users refresh token if it is received', () => {
+      axiosMock.onCall(1).returns(Promise.resolve({
+        data: {
+          access_token: 'new access token',
+          refresh_token: 'new refresh token',
+        },
+      }));
+
+      return spotifyWrapper(user, 'method', '/endpoint', query)
+        .then(() => sinon.assert.calledWith(dbMock.User.update, {
+          payload: {
+            accessToken: 'new access token',
+            refreshToken: 'new refresh token',
+          },
+        }, { where: { id: 0 } }));
+    });
+
+    it('makes the request with the refreshed token', () =>
+      spotifyWrapper(user, 'method', '/endpoint', query)
+        .then(() => sinon.assert.calledWith(axiosMock, {
+          method: 'method',
+          url: 'https://api.spotify.com/v1/endpoint',
+          params: { key: 'value' },
+          headers: { Authorization: 'Bearer new access token' },
+        })));
+
+    it('returns the response to the caller', () =>
+      spotifyWrapper(user, 'method', '/endpoint', query)
+        .then(res => expect(res).to.equal('response')));
+  });
+
+  describe('unauthorized, unsuccessful refresh', () => {
+    beforeEach(() => init(false, false));
+
+    it('throws the error for the caller to handle', () =>
+      spotifyWrapper(user, 'method', '/endpoint', query)
+        .then(() => sinon.assert.fail())
+        .catch(() => sinon.assert.pass()));
+
+    it('hits the Spotify API twice', () =>
+      spotifyWrapper(user, 'method', '/endpoint', query)
+        .catch(() => sinon.assert.calledTwice(axiosMock)));
   });
 });
