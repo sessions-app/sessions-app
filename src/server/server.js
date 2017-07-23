@@ -4,6 +4,7 @@ const path = require('path');
 const serveStatic = require('serve-static');
 const config = require('config');
 const { session, store, passport } = require('./controllers/auth/setup');
+const bodyParser = require('body-parser');
 
 // Route imports
 const homeRoute = require('./controllers/home');
@@ -38,6 +39,7 @@ store.sync();
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(bodyParser.json());
 
 // Static files
 app.use(serveStatic(path.join(__dirname, '..', '..', 'dist')));
