@@ -31,8 +31,7 @@ const Contribution = (props) => {
         allowTransparency="true"
         className="contribution-content"
         style={{ opacity: isDragging ? 0.5 : 1 }}
-      >
-      </iframe>
+      />
     </div>
   );
 
