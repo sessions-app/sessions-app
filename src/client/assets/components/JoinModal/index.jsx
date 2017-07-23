@@ -3,6 +3,7 @@ import { Modal, Button } from 'react-bootstrap';
 import Autosuggest from 'react-autosuggest';
 import axios from 'axios';
 import Promise from 'bluebird';
+import _ from 'lodash';
 
 import ContributionList from '../ContributionList';
 
@@ -15,7 +16,7 @@ const getSuggestions = (value) => {
   }).then(res => res.data);
 };
 
-const getSuggestionValue = suggestion => (suggestion.name);
+const getSuggestionValue = suggestion => (suggestion);
 
 const renderSuggestion = suggestion => (
   <div>
@@ -28,27 +29,23 @@ class JoinModal extends React.Component {
     super();
     this.state = {
       open: true,
-      contributions: [
-        'a',
-        'b',
-      ],
+      contributions: [],
       value: '',
+      selectedTrack: null,
       suggestions: [],
     };
   }
 
-  onChange(event, value) {
-    debugger;
-    if (value.method === 'type') {
+  onChange(event, track) {
+    if (track.method === 'type') {
       this.setState({
-        value: value.newValue,
+        value: track.newValue,
       });
-    } else if (value.method === 'click') {
-      event.preventDefault();
-      debugger;
-    } else if (value.method === 'enter') {
-      debugger;
-      event.preventDefault();
+    } else if (track.method === 'click' || track.method === 'submit') {
+      this.setState({
+        value: `${track.newValue.name} - ${track.newValue.artist}`,
+        selectedTrack: track.newValue,
+      });
     }
   }
 
@@ -67,13 +64,21 @@ class JoinModal extends React.Component {
       suggestions: [],
     });
   }
-
+  addTrack() {
+    const currContributions = _.clone(this.state.contributions);
+    currContributions.push(this.state.selectedTrack.name);
+    this.setState({
+      contributions: currContributions,
+      selectedTrack: null,
+      value: '',
+    });
+  }
   updateOrder(contributions) {
     this.setState({ contributions });
   }
 
   render() {
-    const { contributions, value, suggestions } = this.state;
+    const { contributions, value, suggestions, selectedTrack } = this.state;
     const inputProps = {
       placeholder: 'Type a track',
       value,
@@ -104,6 +109,11 @@ class JoinModal extends React.Component {
             renderSuggestion={sugg => renderSuggestion(sugg)}
             inputProps={inputProps}
           />
+          <Button
+            bsStyle="primary"
+            onClick={() => this.addTrack()}
+            disabled={!selectedTrack}
+          >+</Button>
         </Modal.Body>
 
         <Modal.Footer className="join-modal">
