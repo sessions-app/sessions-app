@@ -18,9 +18,7 @@ const refresh = (user, method, endpoint, query) =>
   axios({
     method: 'post',
     url: `${authBaseRoute}/api/token`,
-    headers: {
-      Authorization: `Basic ${basicAuth}`,
-    },
+    headers: { Authorization: `Basic ${basicAuth}` },
     data: qs.stringify({
       grant_type: 'refresh_token',
       refresh_token: user.payload.refreshToken,
