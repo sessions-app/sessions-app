@@ -66,7 +66,7 @@ class JoinModal extends React.Component {
   }
   addTrack() {
     const currContributions = _.clone(this.state.contributions);
-    currContributions.push(this.state.selectedTrack.name);
+    currContributions.push(this.state.selectedTrack.id);
     this.setState({
       contributions: currContributions,
       selectedTrack: null,
