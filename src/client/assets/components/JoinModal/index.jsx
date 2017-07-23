@@ -112,7 +112,6 @@ class JoinModal extends React.Component {
                 inputProps={inputProps}
               />
               <Button
-                bsStyle="primary"
                 id="contribute-track-btn"
                 onClick={() => this.addTrack()}
                 disabled={!selectedTrack}
@@ -120,7 +119,7 @@ class JoinModal extends React.Component {
             </span>
             <span className="submit-contributions">
               <Button
-                bsStyle="primary"
+                id="submit-contributions-btn"
                 onClick={() => this.submitContributions()}
               >Submit</Button>
             </span>

@@ -21,3 +21,12 @@
   padding: 5px;
   width: 100%;
 }
+
+#contribute-track-btn, #submit-contributions-btn {
+  background-color: $button-color;
+  color: $canvas-color;
+  border-style: none;
+  &:hover, &:focus {
+    background-color: $button-color-hover;
+  }
+}
