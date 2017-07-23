@@ -37,10 +37,19 @@ class JoinModal extends React.Component {
     };
   }
 
-  onChange(event, { newValue }) {
-    this.setState({
-      value: newValue,
-    });
+  onChange(event, value) {
+    debugger;
+    if (value.method === 'type') {
+      this.setState({
+        value: value.newValue,
+      });
+    } else if (value.method === 'click') {
+      event.preventDefault();
+      debugger;
+    } else if (value.method === 'enter') {
+      debugger;
+      event.preventDefault();
+    }
   }
 
   onSuggestionsFetchRequested({ value }) {
