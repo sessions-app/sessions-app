@@ -20,13 +20,15 @@ $item-color-hover: darken($item-color, 10%);
 }
 
 .contribution {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 120px;
 }
 
 .contribution-content {
-  margin-top: 20px;
+
 }
 
 .contribution-drop-valid-over {
