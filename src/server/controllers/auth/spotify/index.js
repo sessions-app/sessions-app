@@ -1,5 +1,6 @@
 const express = require('express');
-const { passport, authMiddleware } = require('../config');
+const { passport, authMiddleware } = require('../setup');
+const spotifyRequest = require('../../../helpers/spotifyRequest');
 
 const router = express.Router();
 
@@ -13,7 +14,9 @@ router.get('/callback',
   });
 
 router.get('/test', authMiddleware, (req, res) => {
-  res.send(req.user);
+  spotifyRequest(req.user, 'get', '/me')
+    .then(resp => res.send(resp.data))
+    .catch(() => res.status(500).end());
 });
 
 module.exports = router;

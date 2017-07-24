@@ -2,8 +2,9 @@ const express = require('express');
 const exhbs = require('../client/views/exhbs');
 const path = require('path');
 const serveStatic = require('serve-static');
-
-const { session, store, passport } = require('./controllers/auth/config');
+const config = require('config');
+const { session, store, passport } = require('./controllers/auth/setup');
+const bodyParser = require('body-parser');
 
 // Route imports
 const homeRoute = require('./controllers/home');
@@ -17,7 +18,7 @@ const app = express();
 app.engine('.hbs', exhbs.engine);
 app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, '..', 'client', 'views'));
-app.locals.assetPrefix = process.env.NODE_ENV === 'development' ? 'http://localhost:8082/assets' : '';
+app.locals.assetPrefix = config.get('assetPrefix');
 
 // Session/Authentication Configuration
 const sessOptions = {
@@ -38,6 +39,7 @@ store.sync();
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(bodyParser.json());
 
 // Static files
 app.use(serveStatic(path.join(__dirname, '..', '..', 'dist')));

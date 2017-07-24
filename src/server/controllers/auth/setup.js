@@ -3,12 +3,12 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const db = require('../../models');
 const passport = require('passport');
 const SpotifyStrategy = require('passport-spotify').Strategy;
+const config = require('config');
+
+const protocol = config.get('protocol');
+const hostname = config.get('hostname');
 
 const store = new SequelizeStore({ db: db.sequelize });
-
-const callbackURLPrefix = process.env.NODE_ENV === 'production'
-  ? 'https://sessions-mvp.herokuapp.com'
-  : 'http://localhost:8080';
 
 passport.serializeUser((user, done) => done(null, user.id));
 
@@ -28,7 +28,7 @@ passport.deserializeUser((id, done) => db.User
 passport.use(new SpotifyStrategy({
   clientID: process.env.SPOTIFY_CLIENT_ID,
   clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-  callbackURL: `${callbackURLPrefix}/auth/spotify/callback`,
+  callbackURL: `${protocol}://${hostname}/auth/spotify/callback`,
 }, (accessToken, refreshToken, profile, done) => db.User
   .findOrCreate({ where: { username: profile.displayName } })
   .spread((user) => {
