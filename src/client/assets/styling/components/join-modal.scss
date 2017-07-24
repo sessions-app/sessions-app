@@ -1,3 +1,23 @@
 .join-modal {
   background-color: $canvas-color;
 }
+.modal-title {
+  text-align: center;
+  font-size: 1.75em;
+}
+.join-modal.modal-body {
+  display: flex;
+}
+.submit-contributions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin: 5px;
+}
+.contribution-controls {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  width: 100%;
+}
