@@ -4,6 +4,7 @@ import Autosuggest from 'react-autosuggest';
 import axios from 'axios';
 import Promise from 'bluebird';
 import _ from 'lodash';
+import classnames from 'classnames';
 
 import ContributionList from '../ContributionList';
 
@@ -81,6 +82,14 @@ class JoinModal extends React.Component {
 
   render() {
     const { contributions, value, suggestions, selectedTrack } = this.state;
+    const submitBtnClasses = classnames('submit-contributions-btn', {
+      'submit-contributions-enabled': (contributions.length >= 5),
+      'submit-contributions-disabled': (contributions.length < 5),
+    });
+    const contributeBtnClasses = classnames('contribute-track-btn', {
+      'contribute-track-enabled': (selectedTrack || (contributions.length < 5)),
+      'contribute-track-disabled': (!selectedTrack || (contributions.length >= 5)),
+    });
     const inputProps = {
       placeholder: 'Type a track',
       value,
@@ -114,15 +123,16 @@ class JoinModal extends React.Component {
                 inputProps={inputProps}
               />
               <Button
-                className="contribute-track-btn"
+                className={contributeBtnClasses}
                 onClick={() => this.addTrack()}
                 disabled={!selectedTrack || (contributions.length >= 5)}
               >+</Button>
             </span>
             <span className="submit-contributions">
               <Button
-                className="submit-contributions-btn"
+                className={submitBtnClasses}
                 onClick={() => this.submitContributions()}
+                disabled={contributions.length < 5}
               >Submit</Button>
             </span>
           </span>

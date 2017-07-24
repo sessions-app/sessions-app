@@ -65,8 +65,18 @@
   background-color: $button-color;
   color: $canvas-color;
   border-style: none;
+}
+
+.contribute-track-enabled, .submit-contributions-enabled{
   &:hover, &:focus {
     background-color: $button-color-hover;
+  }
+}
+
+.contribute-track-disabled, .submit-contributions-disabled{
+  &:hover, &:focus {
+    background-color: $button-color!important;
+    color: $canvas-color;
   }
 }
 
