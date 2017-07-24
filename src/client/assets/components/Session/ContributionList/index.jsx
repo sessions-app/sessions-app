@@ -44,4 +44,4 @@ ContributionList.propTypes = {
   updateOrder: PropTypes.func.isRequired,
 };
 
-module.exports = DragDropContext(HTML5Backend)(ContributionList);
+export default DragDropContext(HTML5Backend)(ContributionList);

@@ -64,4 +64,4 @@ ContributionSlot.defaultProps = {
   swap: null,
 };
 
-module.exports = DropTarget('CONTRIBUTION', contributionSlotTarget, collect)(ContributionSlot);
+export default DropTarget('CONTRIBUTION', contributionSlotTarget, collect)(ContributionSlot);
