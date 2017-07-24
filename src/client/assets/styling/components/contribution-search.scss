@@ -68,13 +68,13 @@
 }
 
 .contribute-track-enabled, .submit-contributions-enabled{
-  &:hover, &:focus {
-    background-color: $button-color-hover;
+  &:hover, &:focus, &:active {
+    background-color: $button-color-hover!important;
   }
 }
 
 .contribute-track-disabled, .submit-contributions-disabled{
-  &:hover, &:focus {
+  &:hover, &:focus, &:active {
     background-color: $button-color!important;
     color: $canvas-color;
   }
