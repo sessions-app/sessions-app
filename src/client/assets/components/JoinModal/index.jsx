@@ -41,7 +41,7 @@ class JoinModal extends React.Component {
       this.setState({
         value: track.newValue,
       });
-    } else if (track.method === 'click' || track.method === 'submit') {
+    } else if (track.method === 'click' || track.method === 'enter') {
       this.setState({
         value: `${track.newValue.name} - ${track.newValue.artist}`,
         selectedTrack: track.newValue,
@@ -64,6 +64,7 @@ class JoinModal extends React.Component {
       suggestions: [],
     });
   }
+
   addTrack() {
     const currContributions = _.clone(this.state.contributions);
     if (currContributions.length < 5) (currContributions.push(this.state.selectedTrack.id));
@@ -73,6 +74,7 @@ class JoinModal extends React.Component {
       value: '',
     });
   }
+
   updateOrder(contributions) {
     this.setState({ contributions });
   }
@@ -112,14 +114,14 @@ class JoinModal extends React.Component {
                 inputProps={inputProps}
               />
               <Button
-                id="contribute-track-btn"
+                className="contribute-track-btn"
                 onClick={() => this.addTrack()}
-                disabled={!selectedTrack}
+                disabled={!selectedTrack || (contributions.length >= 5)}
               >+</Button>
             </span>
             <span className="submit-contributions">
               <Button
-                id="submit-contributions-btn"
+                className="submit-contributions-btn"
                 onClick={() => this.submitContributions()}
               >Submit</Button>
             </span>

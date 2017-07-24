@@ -61,7 +61,16 @@
   background-color: #ddd;
 }
 
-#contribute-track-btn {
+.contribute-track-btn, .submit-contributions-btn {
+  background-color: $button-color;
+  color: $canvas-color;
+  border-style: none;
+  &:hover, &:focus {
+    background-color: $button-color-hover;
+  }
+}
+
+.contribute-track-btn {
   display: inline-block;
   margin-left: 10px;
   max-height: 30px;
