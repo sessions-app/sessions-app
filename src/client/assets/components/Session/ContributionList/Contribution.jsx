@@ -45,4 +45,4 @@ Contribution.propTypes = {
   contributionId: PropTypes.string.isRequired,
 };
 
-module.exports = DragSource('CONTRIBUTION', contributionSource, collect)(Contribution);
+export default DragSource('CONTRIBUTION', contributionSource, collect)(Contribution);

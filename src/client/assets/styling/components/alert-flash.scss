@@ -1,0 +1,7 @@
+
+.alert-flash {
+  position: fixed;
+  bottom: 0%;
+  width: 64%;
+  z-index: 1060; /* Higher than the modal */
+}
