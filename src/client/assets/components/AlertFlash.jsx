@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert } from 'react-bootstrap';
+import { Alert, Fade } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 
@@ -18,8 +18,8 @@ class AlertFlash extends React.Component {
   }
 
   render() {
-    if (this.state.visible) {
-      return (
+    return (
+      <Fade in={this.state.visible}>
         <Alert
           bsStyle={this.props.bsStyle}
           className="alert-flash"
@@ -27,10 +27,8 @@ class AlertFlash extends React.Component {
         >
           {this.props.children}
         </Alert>
-      );
-    }
-
-    return null;
+      </Fade>
+    );
   }
 }
 
