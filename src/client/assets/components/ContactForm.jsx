@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap';
 import axios from 'axios';
-
+import cookie from 'react-cookies';
 
 const ContactForm = () => (
   <div>
@@ -24,7 +24,11 @@ class Form extends React.Component {
       city: '',
       state: '',
       zip: '',
+      trackingCookie: '',
     };
+  }
+  componentWillMount() {
+    this.setState({ trackingCookie: cookie.load('hubspotutk') });
   }
   onChange(event) {
     const target = event.target;
@@ -38,6 +42,8 @@ class Form extends React.Component {
   submitContact() {
     axios.post('/contact/create-or-update', this.state);
   }
+
+
   render() {
     return (
       <form>
@@ -122,6 +128,5 @@ class Form extends React.Component {
     );
   }
 }
-
 
 ReactDOM.render(<ContactForm />, document.getElementById('form-root'));
