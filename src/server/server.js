@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 
 // Route imports
 const homeRoute = require('./controllers/home');
-const sessionsRoute = require('./controllers/sessions');
+const contactRoute = require('./controllers/contact');
 
 // Initializations
 const app = express();
@@ -26,9 +26,6 @@ if (process.env.NODE_ENV === 'production') {
   sessOptions.cookie.secure = true;
 }
 
-
-
-
 app.use(bodyParser.json());
 
 // Static files
@@ -36,6 +33,6 @@ app.use(serveStatic(path.join(__dirname, '..', '..', 'dist')));
 
 // Router wiring
 app.use('/', homeRoute);
-app.use('/sessions', sessionsRoute);
+app.use('/contact', contactRoute);
 
 app.listen(process.env.PORT || 8080);

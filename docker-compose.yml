@@ -12,8 +12,7 @@ services:
     volumes:
       - ./src:/code/src
     environment:
-      - SPOTIFY_CLIENT_ID=${SPOTIFY_CLIENT_ID}
-      - SPOTIFY_CLIENT_SECRET=${SPOTIFY_CLIENT_SECRET}
+      - HUBSPOT_API_KEY=b0dfb14f-246d-449d-b3a2-309e10434f45
   db:
     image: postgres:alpine
     ports:

@@ -1,16 +1,8 @@
 
 <div class='page-header site-title'>
-  <h1>Sessions</h1>
-  <nav>
-    {{#unless loggedIn}}
-      <a href='/auth/spotify' class='btn home-page-btn'>Join</a>
-    {{/unless}}
-  </nav>
+  <h1>HubSpot Contact Creation</h1>
 </div>
 <div class='jumbotron site-hook'>
-  <h1>Music Lovers...</h1>
-  <p>
-    This is example text that isn't actually our site hook, but we'll work on that. If you want to learn more, join a session.
-  </p>
-  <p><a class='btn btn-lg home-page-btn' href='/sessions'>Join Session</a></p>
+  <div id='form-root'></div>
+  <script src='{{assetPrefix}}/js/contactform.js'></script>
 </div>

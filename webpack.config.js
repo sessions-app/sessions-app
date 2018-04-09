@@ -4,7 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
-    session: './src/client/assets/components/Session.jsx',
+    contactform: './src/client/assets/components/ContactForm.jsx',
     styling: './src/client/assets/styling',
   },
   output: {
